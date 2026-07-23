@@ -377,6 +377,7 @@ body {
 
   .taskferry-window {
     position: absolute;
+    z-index: 2;
     width: 11.5rem;
     overflow: hidden;
     border: 1px solid rgba(7, 59, 129, 0.13);
@@ -499,30 +500,29 @@ body {
 
   .taskferry-route {
     position: absolute;
-    z-index: 5;
-    top: 50%;
-    left: 50%;
-    width: 2.75rem;
-    height: 2.75rem;
-    transform: translate(-50%, -50%);
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
   }
 
   .taskferry-route::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
-    z-index: -1;
     width: 7.75rem;
     border-top: 2px dashed #14bfd0;
     transform: translate(-50%, -50%) rotate(7deg);
   }
 
   .taskferry-route img {
-    width: 2.75rem;
-    height: 2.75rem;
+    position: absolute;
+    top: -0.25rem;
+    right: -1rem;
+    width: 2.25rem;
+    height: 2.25rem;
     border: 2px solid rgba(255, 250, 240, 0.9);
-    border-radius: 0.72rem;
+    border-radius: 0.62rem;
     box-shadow: 0 8px 18px rgba(4, 41, 91, 0.25);
   }
 
