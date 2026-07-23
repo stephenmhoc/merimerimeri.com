@@ -1,0 +1,93 @@
+---
+layout: default
+title: Task Ferry
+description: "A private, native bridge for using Apple Reminders across your Macs—with your own Cloudflare account."
+image: /assets/task-ferry-icon.png
+---
+
+<nav class="site-nav" aria-label="Task Ferry navigation">
+  <a href="/">Stephen Meriwether</a>
+  <a href="https://github.com/smeriwether/task-ferry">Source</a>
+  <a href="https://github.com/smeriwether/task-ferry/releases/latest">Download</a>
+</nav>
+
+<article class="pb-16">
+  <header class="mb-12">
+    <img
+      class="mb-8 h-24 w-24 rounded-[22px] shadow-sm"
+      src="/assets/task-ferry-icon.png"
+      alt="Task Ferry app icon"
+      width="96"
+      height="96"
+    >
+    <p class="eyebrow">Native macOS app</p>
+    <h1 class="mb-5 text-3xl font-medium leading-tight md:text-4xl">Your Reminders. Your Macs. Your Cloudflare.</h1>
+    <p class="text-xl leading-8 text-neutral-900">
+      Task Ferry connects Apple Reminders across Macs without moving your tasks into somebody else's cloud.
+    </p>
+  </header>
+
+  <section class="section-block" aria-labelledby="how-it-works">
+    <div class="section-heading">
+      <h2 id="how-it-works">One app. Two roles.</h2>
+    </div>
+    <div class="grid gap-5 text-neutral-700 sm:grid-cols-2">
+      <div class="rounded-lg border border-neutral-200 bg-white p-5">
+        <h3 class="mb-2 font-semibold">Bridge Mac</h3>
+        <p>Reads and updates Apple Reminders locally. Reminders stays the source of truth.</p>
+      </div>
+      <div class="rounded-lg border border-neutral-200 bg-white p-5">
+        <h3 class="mb-2 font-semibold">Remote Mac</h3>
+        <p>Connects securely to your bridge and gives you the same native Task Ferry experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="your-cloudflare">
+    <div class="section-heading">
+      <h2 id="your-cloudflare">Bring your own Cloudflare</h2>
+      <p>Your account. Your resources. Your control.</p>
+    </div>
+    <div class="grid gap-4 text-neutral-700">
+      <p>
+        You authorize Task Ferry with narrowly scoped Cloudflare permissions. It creates a Tunnel, DNS record, Access application, and service token inside your Cloudflare account, then revokes its temporary setup access.
+      </p>
+      <p>
+        Task Ferry does not run a relay, host an account for you, or keep a copy of your reminders. Your bridge remains bound to localhost and Cloudflare carries the encrypted connection between your Macs.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="privacy">
+    <div class="section-heading">
+      <h2 id="privacy">Built for private data</h2>
+    </div>
+    <ul class="plain-list">
+      <li><strong>Apple Reminders remains canonical.</strong> Task Ferry fetches reminders from EventKit when you use it.</li>
+      <li><strong>Credentials stay in Keychain.</strong> Tokens are not written to logs or ordinary files.</li>
+      <li><strong>Two layers of authentication.</strong> Cloudflare Access protects the route; Task Ferry protects the bridge API.</li>
+      <li><strong>No Cloudflare CLI required.</strong> Setup and the tunnel connector are built into the app.</li>
+    </ul>
+  </section>
+
+  <section class="section-block rounded-lg border border-neutral-200 bg-white p-6" aria-labelledby="get-task-ferry">
+    <h2 id="get-task-ferry" class="mb-2 text-lg font-semibold">Get Task Ferry</h2>
+    <p class="mb-5 text-neutral-700">Download the latest signed macOS release or inspect every line of the open-source app.</p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        class="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white no-underline hover:bg-neutral-700"
+        href="https://github.com/smeriwether/task-ferry/releases/latest"
+      >Download latest release</a>
+      <a
+        class="rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-900 no-underline hover:bg-neutral-100"
+        href="https://github.com/smeriwether/task-ferry"
+      >View source</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>© Stephen Meriwether</span>
+    <a href="mailto:stephen@merimerimeri.com">Contact</a>
+    <a href="https://github.com/smeriwether/task-ferry/blob/main/LICENSE">MIT License</a>
+  </footer>
+</article>
