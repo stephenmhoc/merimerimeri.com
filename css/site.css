@@ -347,6 +347,244 @@ body {
     color: rgba(255, 255, 255, 0.8);
   }
 
+  /* Task Ferry - private reminders crossing between Macs */
+  .product-card.task-ferry {
+    min-height: 10.75rem;
+    border-color: rgba(7, 59, 129, 0.12);
+    background:
+      linear-gradient(135deg, #fffaf0 0%, #f8f0df 58%, #e8f5f3 100%);
+    color: #10233e;
+  }
+
+  .product-card.task-ferry::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 91% 5%, rgba(244, 92, 77, 0.17), transparent 25%),
+      radial-gradient(circle at 72% 100%, rgba(20, 191, 208, 0.18), transparent 30%);
+    pointer-events: none;
+  }
+
+  .taskferry-decoration {
+    position: relative;
+    z-index: 10;
+    width: min(calc(100% - 3rem), 16rem);
+    height: 7.6rem;
+    margin: 0 1.5rem 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .taskferry-window {
+    position: absolute;
+    width: 11.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(7, 59, 129, 0.13);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 12px 30px rgba(4, 41, 91, 0.13);
+  }
+
+  .taskferry-window-personal {
+    top: 0;
+    left: 0;
+    transform: rotate(-2deg);
+  }
+
+  .taskferry-window-work {
+    right: 0;
+    bottom: 0;
+    transform: rotate(2deg);
+  }
+
+  .taskferry-titlebar {
+    display: grid;
+    grid-template-columns: 2.15rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.28rem;
+    min-height: 1.45rem;
+    padding: 0 0.45rem;
+    border-bottom: 1px solid rgba(7, 59, 129, 0.09);
+    background: #f5f7f9;
+    color: #647286;
+    font-size: 0.46rem;
+    font-weight: 750;
+    line-height: 1;
+  }
+
+  .taskferry-lights {
+    display: flex;
+    gap: 0.18rem;
+  }
+
+  .taskferry-lights i {
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 999px;
+    background: #ff685d;
+  }
+
+  .taskferry-lights i:nth-child(2) {
+    background: #ffbd45;
+  }
+
+  .taskferry-lights i:nth-child(3) {
+    background: #49cc5c;
+  }
+
+  .taskferry-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    color: #315f69;
+  }
+
+  .taskferry-status i {
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 999px;
+    background: #14bfd0;
+    box-shadow: 0 0 0 2px rgba(20, 191, 208, 0.12);
+  }
+
+  .taskferry-status.synced i {
+    background: #f45c4d;
+    box-shadow: 0 0 0 2px rgba(244, 92, 77, 0.12);
+  }
+
+  .taskferry-reminder {
+    display: grid;
+    grid-template-columns: 0.9rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.7rem 0.72rem;
+    color: #10233e;
+  }
+
+  .taskferry-check {
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1.5px solid #665ce7;
+    border-radius: 999px;
+  }
+
+  .taskferry-reminder > span:last-child,
+  .taskferry-quick {
+    display: grid;
+    min-width: 0;
+    gap: 0.18rem;
+  }
+
+  .taskferry-reminder strong,
+  .taskferry-reminder small,
+  .taskferry-quick strong,
+  .taskferry-quick small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .taskferry-reminder strong,
+  .taskferry-quick strong {
+    font-size: 0.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .taskferry-reminder small {
+    color: #8b6f7c;
+    font-size: 0.48rem;
+    font-weight: 650;
+  }
+
+  .taskferry-route {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    width: 2.75rem;
+    height: 2.75rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .taskferry-route::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 7.75rem;
+    border-top: 2px dashed #14bfd0;
+    transform: translate(-50%, -50%) rotate(7deg);
+  }
+
+  .taskferry-route img {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid rgba(255, 250, 240, 0.9);
+    border-radius: 0.72rem;
+    box-shadow: 0 8px 18px rgba(4, 41, 91, 0.25);
+  }
+
+  .taskferry-quick {
+    padding: 0.48rem 0.6rem 0.58rem;
+    color: #10233e;
+  }
+
+  .taskferry-quick strong span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.18rem;
+    border-radius: 999px;
+    background: #334158;
+    color: white;
+    font-size: 0.58rem;
+  }
+
+  .taskferry-quick small {
+    border: 1px solid rgba(23, 104, 210, 0.35);
+    border-radius: 4px;
+    padding: 0.26rem 0.35rem;
+    background: #fbfdff;
+    color: #758195;
+    font-size: 0.47rem;
+  }
+
+  @media (min-width: 640px) {
+    .product-card.task-ferry {
+      min-height: 11rem;
+    }
+
+    .product-card.task-ferry .product-content {
+      max-width: 48%;
+      padding-top: 1.75rem;
+    }
+
+    .taskferry-decoration {
+      position: absolute;
+      right: 1.35rem;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+    }
+  }
+
+  .product-card.task-ferry:hover {
+    background:
+      linear-gradient(135deg, #fffdf6 0%, #f9f1df 58%, #ddf2ef 100%);
+  }
+
+  .product-card.task-ferry .product-name {
+    color: #073b81;
+  }
+
+  .product-card.task-ferry .product-tagline {
+    color: #4b5d74;
+  }
+
   /* AI Radar - lab intelligence feed preview */
   .product-card.ai-radar {
     @apply border-0;
