@@ -13,19 +13,13 @@
   content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}"
 />
 <meta property="og:description" content="{{ page_description }}" />
-{% if page.image %}
-<meta property="og:image" content="{{ page.image | absolute_url }}" />
-{% endif %}
 <meta
   property="twitter:title"
   content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}"
 />
 <meta property="twitter:creator" content="@{{ site.twitter_username }}" />
 <meta property="twitter:description" content="{{ page_description }}" />
-{% if page.image %}
-<meta property="twitter:image" content="{{ page.image | absolute_url }}" />
-{% endif %}
-<meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}" />
+<meta name="twitter:card" content="summary" />
 <link rel="alternate" type="application/rss+xml" title="Stephen Meriwether's Blog" href="https://blog.merimerimeri.com/feed.xml" />
 <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />

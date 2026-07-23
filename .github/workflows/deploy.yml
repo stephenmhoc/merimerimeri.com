@@ -12,7 +12,6 @@ on:
       - 'assets/**'
       - 'blog/**'
       - 'css/**'
-      - 'task-ferry/**'
       - '*.html'
       - 'Gemfile*'
       - 'package*.json'

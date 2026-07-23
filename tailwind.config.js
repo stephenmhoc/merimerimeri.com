@@ -6,7 +6,6 @@ module.exports = {
     './*.html',
     './blog/**/*.html',
     './consulting/**/*.html',
-    './task-ferry/**/*.html',
   ],
   theme: {
     extend: {
