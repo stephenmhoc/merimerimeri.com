@@ -231,10 +231,11 @@
     if (isPartial) {
       status.textContent = "Full archive unavailable — showing the recent feed only.";
       status.classList.add("is-degraded");
+      status.hidden = false;
       return;
     }
 
-    status.textContent = "Live from the blog archive.";
+    status.hidden = true;
   }
 
   fetchArchiveEntries().then(function (entries) {
@@ -247,6 +248,7 @@
       range.textContent = "";
       status.textContent = "Activity unavailable — open the archive instead.";
       status.classList.add("is-error");
+      status.hidden = false;
     });
   });
 }());
