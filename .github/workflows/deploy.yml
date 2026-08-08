@@ -8,9 +8,9 @@ on:
       - '_config.yml'
       - '_includes/**'
       - '_layouts/**'
+      - '_plugins/**'
       - '_posts/**'
       - 'assets/**'
-      - 'bin/**'
       - 'blog/**'
       - 'css/**'
       - '*.html'
@@ -60,9 +60,6 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-
-      - name: Fingerprint stylesheet
-        run: ruby bin/fingerprint-css _site
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

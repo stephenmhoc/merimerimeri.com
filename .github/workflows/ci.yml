@@ -6,10 +6,10 @@ on:
       - '_config.yml'
       - '_includes/**'
       - '_layouts/**'
+      - '_plugins/**'
       - '_posts/**'
       - '_archive/**'
       - 'assets/**'
-      - 'bin/**'
       - 'blog/**'
       - 'css/**'
       - '*.html'
@@ -76,6 +76,3 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-
-      - name: Fingerprint stylesheet
-        run: ruby bin/fingerprint-css _site
