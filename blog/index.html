@@ -23,3 +23,58 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
     <a href="https://blog.merimerimeri.com/" class="link">blog.merimerimeri.com</a>
   </p>
 </section>
+
+<section
+  class="writing-activity"
+  data-writing-activity
+  data-archive-url="https://blog.merimerimeri.com/archive/"
+  data-feed-url="https://blog.merimerimeri.com/feed.json"
+  aria-labelledby="writing-activity-heading"
+>
+  <header class="writing-activity-header">
+    <h2 id="writing-activity-heading" data-activity-summary>
+      Loading writing activity…
+    </h2>
+    <p data-activity-range></p>
+  </header>
+
+  <div class="writing-activity-card">
+    <div
+      class="writing-activity-scroll"
+      data-activity-scroll
+      tabindex="0"
+      aria-label="Blog posts by day. Scroll horizontally to see the full year."
+    >
+      <div class="writing-activity-canvas" data-activity-canvas hidden>
+        <div class="writing-activity-months" data-activity-months aria-hidden="true"></div>
+        <div class="writing-activity-grid" data-activity-grid></div>
+      </div>
+    </div>
+
+    <footer class="writing-activity-footer">
+      <a href="https://blog.merimerimeri.com/archive/">Open the archive <span aria-hidden="true">→</span></a>
+
+      <div class="writing-activity-legend" aria-label="Activity level: less to more">
+        <span>Less</span>
+        <i data-level="0"></i>
+        <i data-level="1"></i>
+        <i data-level="2"></i>
+        <i data-level="3"></i>
+        <i data-level="4"></i>
+        <span>More</span>
+      </div>
+    </footer>
+
+    <p class="writing-activity-status" data-activity-status aria-live="polite">
+      Fetching the latest posts…
+    </p>
+
+    <noscript>
+      <p class="writing-activity-status">
+        JavaScript is required to draw the activity chart. The full archive is still available above.
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<script src="/assets/js/writing-activity.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
