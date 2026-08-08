@@ -234,7 +234,7 @@
       return;
     }
 
-    status.textContent = "Updated live from the blog archive.";
+    status.textContent = "Live from the blog archive.";
   }
 
   fetchArchiveEntries().then(function (entries) {
@@ -245,7 +245,7 @@
     }).catch(function () {
       summary.textContent = "Writing activity";
       range.textContent = "";
-      status.textContent = "The activity chart couldn’t be loaded. The blog archive is still available above.";
+      status.textContent = "Activity unavailable — open the archive instead.";
       status.classList.add("is-error");
     });
   });

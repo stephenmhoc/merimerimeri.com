@@ -52,7 +52,13 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
     </div>
 
     <footer class="writing-activity-footer">
-      <a href="https://blog.merimerimeri.com/archive/">Open the archive <span aria-hidden="true">→</span></a>
+      <div class="writing-activity-details">
+        <a href="https://blog.merimerimeri.com/archive/">Open the archive <span aria-hidden="true">→</span></a>
+
+        <p class="writing-activity-status" data-activity-status aria-live="polite">
+          Fetching the latest posts…
+        </p>
+      </div>
 
       <div class="writing-activity-legend" aria-label="Activity level: less to more">
         <span>Less</span>
@@ -65,12 +71,8 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
       </div>
     </footer>
 
-    <p class="writing-activity-status" data-activity-status aria-live="polite">
-      Fetching the latest posts…
-    </p>
-
     <noscript>
-      <p class="writing-activity-status">
+      <p class="writing-activity-status is-degraded">
         JavaScript is required to draw the activity chart. The full archive is still available above.
       </p>
     </noscript>
