@@ -44,7 +44,7 @@ The generated site is written to `_site/`.
 
 ## Site structure
 
-- `index.html` - home page with project cards for MenuMines, Historical Fantasy Football Stats, and FoodFight.
+- `index.html` - home page with project cards for active MeriMeriMeri Software products.
 - `blog/index.html` - writing landing page at `/writing/`.
 - `consulting/index.html` - consulting page at `/consulting/`.
 - `_posts/` - active Jekyll posts.
