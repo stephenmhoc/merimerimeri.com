@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/smeriwether/merimerimeri.com/actions/workflows/ci.yml/badge.svg)](https://github.com/smeriwether/merimerimeri.com/actions/workflows/ci.yml)
 
-Personal site for Stephen Meriwether and MeriMeriMeri Software. Built with Jekyll 4.4, Liquid templates, Tailwind CSS 3, and PostCSS. Deployed to Cloudflare Pages.
+Personal site for Stephen Meriwether and MeriMeriMeri Software. Built with Jekyll 4.4, Liquid templates, Tailwind CSS 3, and PostCSS. Deployed to Cloudflare Workers with the `cf` CLI.
 
 See it live at [merimerimeri.com](https://merimerimeri.com).
 
@@ -13,10 +13,10 @@ Requires Ruby, Bundler, Node.js, and npm.
 Runtime files in this repo:
 
 - `.ruby-version`: Ruby 3.2.1
-- `.nvmrc`: Node.js 20
-- `.tool-versions`: Ruby 3.3.4 and Node.js 22.11.0 for mise/asdf users
+- `.nvmrc`: Node.js 26
+- `.tool-versions`: Ruby 3.3.4 and Node.js 26.12.1 for mise/asdf users
 
-GitHub Actions currently builds with Ruby 3.2.1 and Node.js 20. If changing runtime versions, update the version files and workflows together.
+GitHub Actions currently builds with the latest Ruby 3.2 and Node.js 26. The `cf` CLI needs Node.js 22.23+, 24.22+, or 26.12+. If changing runtime versions, update the version files and workflows together.
 
 Install dependencies:
 
@@ -70,6 +70,21 @@ JEKYLL_ENV=production bundle exec jekyll build
 
 ## Deployment
 
-Pushes to `main` with site-related changes trigger a separate GitHub Actions workflow that builds the Jekyll site and deploys `_site/` to the Cloudflare Pages project `merimerimeri`.
+The site is a static-assets Cloudflare Worker (`merimerimeri-com`), deployed with the [`cf` CLI](https://developers.cloudflare.com/cf/). Don't use `wrangler pages deploy`; the old Pages project is retired.
+
+- `cloudflare.config.ts` - Worker name, custom domain, and asset settings (404 page).
+- `wrangler.config.ts` - points the asset build at `_site/`.
+
+Deploy from your machine:
+
+```bash
+npx cf auth login   # once
+JEKYLL_ENV=production bundle exec jekyll build
+npx cf deploy
+```
+
+`cf deploy` uploads whatever is in `_site/`, so always build first. `npm run deploy` runs `cf deploy` too.
+
+Pushes to `main` with site-related changes also trigger a GitHub Actions workflow that builds the site and runs `cf deploy`. It needs the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repo secrets; the token needs Workers Scripts edit access on the account.
 
 README-only changes are outside the deploy workflow's path filter.

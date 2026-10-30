@@ -1,10 +1,10 @@
 # AGENTS.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+This file provides guidance to coding agents (Claude Code, Codex, etc.) when working with code in this repository.
 
 ## Project Overview
 
-Website for MeriMeriMeri Software — a studio that builds focused, delightful software products. Jekyll static site styled with Tailwind CSS, deployed to Cloudflare Pages.
+Website for MeriMeriMeri Software — a studio that builds focused, delightful software products. Jekyll static site styled with Tailwind CSS, deployed to Cloudflare Workers.
 
 ## Commands
 
@@ -18,6 +18,9 @@ bundle exec jekyll serve
 
 # Production build
 JEKYLL_ENV=production bundle exec jekyll build
+
+# Deploy (build first; cf uploads _site/ as it is)
+npx cf deploy
 ```
 
 Note: `_config.yml` changes require restarting the server.
@@ -26,7 +29,7 @@ Note: `_config.yml` changes require restarting the server.
 
 - **Static site generator**: Jekyll 4.4 with Liquid templates
 - **CSS**: Tailwind CSS 3 processed via PostCSS (`postcss-import` + `autoprefixer`), integrated through `jekyll-postcss-v2` plugin
-- **Deployment**: GitHub Actions → `bundle exec jekyll build` → Cloudflare Pages (output in `_site/`)
+- **Deployment**: `cf deploy` (the Cloudflare CLI) uploads `_site/` as a static-assets Worker. Pushes to `main` run the same build and `cf deploy` in GitHub Actions. Use `cf`, not `wrangler pages deploy`; the Pages project is retired. `cf` needs Node.js 22.23+.
 
 ### Key Files
 
@@ -34,6 +37,8 @@ Note: `_config.yml` changes require restarting the server.
 - `css/site.css` — main stylesheet (Tailwind imports + custom component styles using `@layer`)
 - `tailwind.config.js` — custom colors (`primary: #FFFFFA`, `secondary: #F5F4E9`), purge paths
 - `postcss.config.js` — PostCSS pipeline
+- `cloudflare.config.ts` — Worker name, custom domain, asset settings
+- `wrangler.config.ts` — points the Worker's assets at `_site/`
 - `index.html` — homepage with product cards (MenuMines, HFFS)
 - `blog/index.html` — writing listing page (permalink: `/writing/`)
 
@@ -67,4 +72,4 @@ The focus is entirely on building products — no consulting or services languag
 
 ## Runtime Versions
 
-Defined in `.tool-versions`: Node.js 22.11.0, Ruby 3.3.4
+Defined in `.tool-versions`: Node.js 26.12.1, Ruby 3.3.4

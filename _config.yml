@@ -50,3 +50,15 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - Jenkinsfile
+  - bin/
+  - package.json
+  - package-lock.json
+  - postcss.config.js
+  - tailwind.config.js
+  - cloudflare.config.ts
+  - wrangler.config.ts
