@@ -1,0 +1,24 @@
+---
+layout: null
+permalink: /blog/feed.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <link href="{{ '/blog/feed.xml' | absolute_url }}" rel="self"/>
+  <link href="{{ '/blog/' | absolute_url }}"/>
+  <id>{{ '/blog/' | absolute_url }}</id>
+  {% assign posts = site.blog | sort: "date" | reverse %}
+  <updated>{{ posts.first.last_modified_at | default: posts.first.date | date_to_xmlschema }}</updated>
+  <author><name>Stephen Meriwether</name></author>
+  {% for post in posts limit: 30 %}
+  <entry>
+    <title>{% capture t %}{% include post-title.html post=post %}{% endcapture %}{{ t | strip | xml_escape }}</title>
+    <link href="{{ post.url | absolute_url }}"/>
+    <id>{{ post.url | absolute_url }}</id>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.last_modified_at | default: post.date | date_to_xmlschema }}</updated>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
+</feed>

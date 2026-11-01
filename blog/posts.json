@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /blog/posts.json
+---
+{"items":[{% assign posts = site.blog | sort: "date" | reverse %}{% for post in posts %}{"url":"{{ post.url | absolute_url }}","date_published":"{{ post.date | date_to_xmlschema }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]}

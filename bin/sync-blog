@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Mirror published posts from the private blog Ghost into this repo.
+
+Writes _blog/<slug>.html (front matter + Ghost's HTML) and downloads every image into
+assets/blog/. Anything in those folders that Ghost no longer has is removed, so the repo is
+always an exact copy of what is published. Run it from the repo root on a machine that can
+reach the Ghost over Tailscale; it prints what changed and exits 0 either way.
+
+Auth (first one found wins):
+  GHOST_CONTENT_KEY            the integration's Content API key (read-only, the normal choice)
+  GHOST_ADMIN_KEY_FILE         file holding the "id:secret" Admin API key (used for local runs)
+Optional: GHOST_URL (default https://blog.merimerimeri.com)
+"""
+import base64, datetime, hashlib, hmac, json, os, re, shutil, sys, urllib.parse, urllib.request
+from zoneinfo import ZoneInfo
+
+GHOST = os.environ.get("GHOST_URL", "https://blog.merimerimeri.com").rstrip("/")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+POSTS_DIR = os.path.join(ROOT, "_blog")
+IMG_DIR = os.path.join(ROOT, "assets", "blog")
+LOCAL_TZ = ZoneInfo("America/New_York")  # the day a post belongs to is the day I wrote it
+HOSTS = {urllib.parse.urlparse(GHOST).netloc}
+
+
+def admin_jwt(key):
+    kid, secret = key.strip().split(":")
+    b64 = lambda raw: base64.urlsafe_b64encode(raw).rstrip(b"=")
+    head = b64(json.dumps({"alg": "HS256", "typ": "JWT", "kid": kid}).encode())
+    now = int(datetime.datetime.now().timestamp())
+    body = b64(json.dumps({"iat": now, "exp": now + 300, "aud": "/admin/"}).encode())
+    sig = b64(hmac.new(bytes.fromhex(secret), head + b"." + body, hashlib.sha256).digest())
+    return (head + b"." + body + b"." + sig).decode()
+
+
+def fetch_posts():
+    """All published posts, newest first, as dicts straight from Ghost."""
+    content_key = os.environ.get("GHOST_CONTENT_KEY")
+    key_file = os.environ.get("GHOST_ADMIN_KEY_FILE")
+    headers = {"Accept-Version": "v5.0"}
+    if content_key:
+        base = f"{GHOST}/ghost/api/content/posts/?key={content_key}"
+    elif key_file:
+        headers["Authorization"] = "Ghost " + admin_jwt(open(os.path.expanduser(key_file)).read())
+        base = f"{GHOST}/ghost/api/admin/posts/?source=html&status=published"
+    else:
+        sys.exit("Set GHOST_CONTENT_KEY or GHOST_ADMIN_KEY_FILE")
+    url = f"{base}&limit=all&include=tags&formats=html&order=published_at%20desc"
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=60) as r:
+        posts = json.load(r)["posts"]
+    return [p for p in posts if p.get("status", "published") == "published" and p.get("type", "post") == "post"]
+
+
+def download(url, seen):
+    """Save a Ghost-hosted image under assets/blog/ and return its site path."""
+    path = urllib.parse.urlparse(url).path
+    rel = path.split("/content/images/", 1)[1] if "/content/images/" in path else path.lstrip("/")
+    dest = os.path.join(IMG_DIR, rel)
+    seen.add(os.path.normpath(dest))
+    if not os.path.exists(dest):
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        with urllib.request.urlopen(urllib.request.Request(url), timeout=60) as r, open(dest, "wb") as f:
+            shutil.copyfileobj(r, f)
+    return "/assets/blog/" + rel.replace(os.sep, "/")
+
+
+def localize(html, seen):
+    def swap(match):
+        url = match.group(0)
+        return download(url, seen) if urllib.parse.urlparse(url).netloc in HOSTS else url
+    pattern = r"https?://(?:%s)/content/images/[^\s\"'<>)]+" % "|".join(re.escape(h) for h in HOSTS)
+    return re.sub(pattern, swap, html)
+
+
+def yaml_str(s):
+    return json.dumps(s, ensure_ascii=False)
+
+
+def render(post, seen):
+    published = datetime.datetime.fromisoformat(post["published_at"].replace("Z", "+00:00")).astimezone(LOCAL_TZ)
+    updated = datetime.datetime.fromisoformat((post.get("updated_at") or post["published_at"]).replace("Z", "+00:00")).astimezone(LOCAL_TZ)
+    tags = [t["name"] for t in post.get("tags", [])]
+    untitled = "#untitled" in tags
+    public_tags = [t for t in tags if not t.startswith("#")]
+    lines = [
+        "---",
+        "layout: blog_post",
+        f"title: {yaml_str(post['title'])}",
+        f"slug: {yaml_str(post['slug'])}",
+        f"date: {published.strftime('%Y-%m-%d %H:%M:%S %z')}",
+        f"last_modified_at: {updated.strftime('%Y-%m-%d %H:%M:%S %z')}",
+        f"untitled: {'true' if untitled else 'false'}",
+        f"tags: {json.dumps(public_tags, ensure_ascii=False)}",
+    ]
+    if post.get("feature_image"):
+        lines.append(f"image: {yaml_str(localize(post['feature_image'], seen))}")
+    lines += ["---", "", localize(post["html"] or "", seen).strip(), ""]
+    return "\n".join(lines)
+
+
+def main():
+    posts = fetch_posts()
+    os.makedirs(POSTS_DIR, exist_ok=True)
+    seen_images, wanted, changed = set(), set(), []
+    for post in posts:
+        name = f"{post['slug']}.html"
+        wanted.add(name)
+        text = render(post, seen_images)
+        dest = os.path.join(POSTS_DIR, name)
+        old = open(dest, encoding="utf-8").read() if os.path.exists(dest) else None
+        if old != text:
+            with open(dest, "w", encoding="utf-8") as f:
+                f.write(text)
+            changed.append(("added" if old is None else "updated", name))
+    for name in sorted(os.listdir(POSTS_DIR)):
+        if name.endswith(".html") and name not in wanted:
+            os.remove(os.path.join(POSTS_DIR, name))
+            changed.append(("removed", name))
+    if os.path.isdir(IMG_DIR):
+        for folder, _, files in os.walk(IMG_DIR, topdown=False):
+            for f in files:
+                p = os.path.normpath(os.path.join(folder, f))
+                if p not in seen_images:
+                    os.remove(p)
+                    changed.append(("removed", os.path.relpath(p, ROOT)))
+            if not os.listdir(folder) and folder != IMG_DIR:
+                os.rmdir(folder)
+    for what, name in changed:
+        print(f"{what}: {name}")
+    print(f"{len(posts)} posts, {len(changed)} changes")
+
+
+if __name__ == "__main__":
+    main()

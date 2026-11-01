@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Writing
-permalink: /writing/
+permalink: /blog/
 description: "Short notes about software, AI, sports, books, and ideas from Stephen Meriwether."
 ---
 
@@ -16,18 +16,14 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
 
   <p class="mb-4">
     Short notes about software, AI, sports, books, and whatever else I'm trying to understand.
-  </p>
-
-  <p>
-    <a href="https://blog.merimerimeri.com/" class="link">blog.merimerimeri.com</a>
+    <a href="/blog/feed.xml">RSS</a>.
   </p>
 </section>
 
 <section
   class="writing-activity"
   data-writing-activity
-  data-archive-url="https://blog.merimerimeri.com/archive/"
-  data-feed-url="https://blog.merimerimeri.com/feed.json"
+  data-feed-url="/blog/posts.json"
   aria-labelledby="writing-activity-heading"
 >
   <header class="writing-activity-header">
@@ -52,8 +48,6 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
 
     <footer class="writing-activity-footer">
       <div class="writing-activity-details">
-        <a href="https://blog.merimerimeri.com/archive/">Open the archive <span aria-hidden="true">→</span></a>
-
         <p class="writing-activity-status" data-activity-status aria-live="polite" hidden></p>
       </div>
 
@@ -70,10 +64,23 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
 
     <noscript>
       <p class="writing-activity-status is-degraded">
-        JavaScript is required to draw the activity chart. The full archive is still available above.
+        JavaScript is required to draw the activity chart. The posts are listed below.
       </p>
     </noscript>
   </div>
+</section>
+
+<section class="mt-12" aria-labelledby="posts-heading">
+  <h2 id="posts-heading" class="sr-only">All posts</h2>
+  <ul class="post-list">
+    {% assign posts = site.blog | sort: "date" | reverse %}
+    {% for post in posts %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <a href="{{ post.url }}">{% include post-title.html post=post %}</a>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 
 <script src="/assets/js/writing-activity.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>

@@ -1,0 +1,2 @@
+{%- comment -%}Title for lists and the feed. Untitled notes get their first words instead of their date title.{%- endcomment -%}
+{%- if include.post.untitled -%}{{ include.post.content | replace: "</p>", " " | replace: "<br>", " " | strip_html | strip_newlines | strip | truncatewords: 12 }}{%- else -%}{{ include.post.title }}{%- endif -%}

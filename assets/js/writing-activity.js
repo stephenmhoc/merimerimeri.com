@@ -5,7 +5,6 @@
     return;
   }
 
-  var archiveUrl = root.dataset.archiveUrl;
   var feedUrl = root.dataset.feedUrl;
   var summary = root.querySelector("[data-activity-summary]");
   var range = root.querySelector("[data-activity-range]");
@@ -14,40 +13,6 @@
   var months = root.querySelector("[data-activity-months]");
   var grid = root.querySelector("[data-activity-grid]");
   var scrollArea = root.querySelector("[data-activity-scroll]");
-
-  function fetchDocument(url) {
-    return fetch(url, { cache: "no-cache" }).then(function (response) {
-      if (!response.ok) {
-        throw new Error("Archive request returned " + response.status);
-      }
-
-      return response.text();
-    }).then(function (html) {
-      return new DOMParser().parseFromString(html, "text/html");
-    });
-  }
-
-  function fetchArchiveEntries() {
-    return fetchDocument(archiveUrl).then(function (document) {
-      var entries = Array.from(document.querySelectorAll("time.dt-published")).map(function (time) {
-        var entry = time.closest(".h-entry");
-        var link = entry ? entry.querySelector("a.u-url") : null;
-
-        return {
-          date: (time.getAttribute("datetime") || "").slice(0, 10),
-          url: link ? link.href : "",
-        };
-      }).filter(function (entry) {
-        return /^\d{4}-\d{2}-\d{2}$/.test(entry.date);
-      });
-
-      if (!entries.length) {
-        throw new Error("The archive contained no dated posts");
-      }
-
-      return entries;
-    });
-  }
 
   function fetchFeedEntries() {
     return fetch(feedUrl, { cache: "no-cache" }).then(function (response) {
@@ -238,17 +203,13 @@
     status.hidden = true;
   }
 
-  fetchArchiveEntries().then(function (entries) {
+  fetchFeedEntries().then(function (entries) {
     render(entries, false);
   }).catch(function () {
-    fetchFeedEntries().then(function (entries) {
-      render(entries, true);
-    }).catch(function () {
-      summary.textContent = "Writing activity";
-      range.textContent = "";
-      status.textContent = "Activity unavailable — open the archive instead.";
-      status.classList.add("is-error");
-      status.hidden = false;
-    });
+    summary.textContent = "Writing activity";
+    range.textContent = "";
+    status.textContent = "Activity unavailable.";
+    status.classList.add("is-error");
+    status.hidden = false;
   });
 }());

@@ -41,7 +41,8 @@ Note: `_config.yml` changes require restarting the server.
 - `wrangler.config.ts` — points the Worker's assets at `_site/`
 - `index.html` — homepage: intro plus an icon-and-text list of projects
 - `_projects/*.md` — one file per project; each renders at `/<slug>/` via `_layouts/project.html`. Front matter: `title`, `tagline`, `tags` (platforms, e.g. `[macOS, iOS]`; they render as pills and drive the `/apps/` filter), `order`, `icon` (required), `source`, `download` (Mac DMG), `testflight` (iOS public link; hidden when empty), `screenshot` (or a `screenshots` list), `live`. The list on the homepage and `/apps/` is the shared `_includes/project-list.html`. To add a project, add a file here (and an icon in `assets/icons/` if it has one)
-- `blog/index.html` — writing listing page (permalink: `/writing/`)
+- `blog/index.html` — writing list + activity chart at `/blog/`; `blog/feed.xml` (Atom) and `blog/posts.json` (chart data) sit beside it. `/writing/` is a redirect stub.
+- `_blog/*.html` — one file per post, **generated, don't edit by hand**. `bin/sync-blog` mirrors published posts from the private blog Ghost (tailnet-only) into `_blog/` and `assets/blog/`, then the result is committed and pushed so CI deploys it. Needs `GHOST_CONTENT_KEY` (or `GHOST_ADMIN_KEY_FILE`) and Tailscale access. Posts tagged `#untitled` render as titleless notes. Write posts in Ghost, never here.
 
 ### Layouts & Templates
 
@@ -53,7 +54,6 @@ Note: `_config.yml` changes require restarting the server.
 
 ### Content
 
-- `_posts/` — blog posts (markdown with front matter)
 - `_archive/` — older/retired posts
 
 ### Styling Conventions
