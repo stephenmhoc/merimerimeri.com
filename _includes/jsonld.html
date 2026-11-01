@@ -1,0 +1,68 @@
+{%- assign person_id = '/#stephen' | absolute_url -%}
+{%- if page.url == '/' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": {{ person_id | jsonify }},
+      "name": "Stephen Meriwether",
+      "url": {{ '/' | absolute_url | jsonify }},
+      "image": {{ '/assets/stephen.jpeg' | absolute_url | jsonify }},
+      "description": "Builds small, open-source apps and tools for personal use.",
+      "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Rochester", "addressRegion": "NY", "addressCountry": "US" } },
+      "sameAs": ["https://github.com/{{ site.github_username }}", "https://x.com/{{ site.twitter_username }}"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ '/#website' | absolute_url | jsonify }},
+      "url": {{ '/' | absolute_url | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "inLanguage": "en",
+      "publisher": { "@id": {{ person_id | jsonify }} }
+    }
+  ]
+}
+</script>
+{%- elsif page.layout == 'project' -%}
+{%- assign os_list = '' | split: '' -%}
+{%- for t in page.tags -%}{%- case t -%}{%- when 'macOS' -%}{%- assign os_list = os_list | push: 'macOS' -%}{%- when 'iOS' -%}{%- assign os_list = os_list | push: 'iOS' -%}{%- when 'Web' -%}{%- assign os_list = os_list | push: 'Any (web browser)' -%}{%- endcase -%}{%- endfor -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page_description | strip_html | strip_newlines | jsonify }},
+  "applicationCategory": {{ page.category | default: 'UtilitiesApplication' | jsonify }},
+  "operatingSystem": {{ os_list | join: ', ' | jsonify }},
+  "url": {{ page_url | jsonify }},
+  "image": {{ page_image | jsonify }},
+  {%- if page.download %}
+  "downloadUrl": {{ page.download | jsonify }},
+  {%- endif %}
+  {%- if page.live %}
+  "installUrl": {{ page.live | jsonify }},
+  {%- endif %}
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "sameAs": {{ page.source | jsonify }},
+  "author": { "@type": "Person", "name": "Stephen Meriwether", "url": {{ '/' | absolute_url | jsonify }} }
+}
+</script>
+{%- elsif page.layout == 'blog_post' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  {%- unless page.untitled %}
+  "headline": {{ page.title | jsonify }},
+  {%- endunless %}
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "mainEntityOfPage": {{ page_url | jsonify }},
+  "image": {{ page_image | jsonify }},
+  "author": { "@type": "Person", "@id": {{ person_id | jsonify }}, "name": "Stephen Meriwether", "url": {{ '/' | absolute_url | jsonify }} }
+}
+</script>
+{%- endif -%}

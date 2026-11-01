@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Render the 1200x630 share images in assets/og/ (default + one per project) with headless Chrome.
+
+Run from the repo root after adding a project or changing a tagline:  bin/make-og
+Reads _projects/*.md front matter (title, tagline, icon). Needs Google Chrome.
+"""
+import glob, html, os, re, subprocess, tempfile
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+OUT = os.path.join(ROOT, "assets", "og")
+
+PAGE = """<!doctype html><meta charset="utf-8"><style>
+*{{box-sizing:border-box}} html,body{{margin:0;width:1200px;height:630px}}
+body{{background:#FFFFFA;color:#262626;font-family:Georgia,'Times New Roman',serif;display:flex;flex-direction:column;justify-content:space-between;padding:72px 80px}}
+.top{{display:flex;align-items:center;gap:36px}} .icon{{width:168px;height:168px;border-radius:38px;object-fit:contain}}
+h1{{font-size:{h1}px;line-height:1.05;margin:0;letter-spacing:-1px}} p.tag{{font-size:38px;line-height:1.3;margin:24px 0 0;color:#525252;max-width:880px}}
+.foot{{display:flex;justify-content:space-between;align-items:center;font-size:30px;color:#737373}} .icons{{display:flex;gap:18px}} .icons img{{width:64px;height:64px;border-radius:15px}}
+</style>
+<div class="top">{icon}<div><h1>{title}</h1><p class="tag">{tagline}</p></div></div>
+<div class="foot"><span>merimerimeri.com</span><div class="icons">{icons}</div></div>"""
+
+
+def front_matter(path):
+    text = open(path, encoding="utf-8").read()
+    block = re.match(r"---\n(.*?)\n---", text, re.S).group(1)
+    return {m.group(1): m.group(2).strip().strip('"') for m in re.finditer(r"^(\w+):\s*(.+)$", block, re.M)}
+
+
+def icon_url(rel):
+    return "file://" + os.path.join(ROOT, rel.lstrip("/"))
+
+
+def render(name, title, tagline, icon, icons):
+    icon_html = f'<img class="icon" src="{icon_url(icon)}" alt="">' if icon else ""
+    icons_html = "".join(f'<img src="{icon_url(i)}" alt="">' for i in icons)
+    page = PAGE.format(title=html.escape(title), tagline=html.escape(tagline), icon=icon_html, icons=icons_html,
+                       h1=88 if len(title) < 22 else 64)
+    with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as f:
+        f.write(page)
+    os.makedirs(OUT, exist_ok=True)
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
+                    "--window-size=1200,630", f"--screenshot={os.path.join(OUT, name)}.png", "file://" + f.name],
+                   check=True, capture_output=True)
+    os.unlink(f.name)
+    print("wrote", f"assets/og/{name}.png")
+
+
+projects = [(front_matter(p), os.path.basename(p)[:-3]) for p in sorted(glob.glob(os.path.join(ROOT, "_projects", "*.md")))]
+png_icons = [fm["icon"] for fm, _ in projects if fm.get("icon", "").endswith(".png")]
+render("default", "Stephen Meriwether", "Small, open-source apps and tools, tailor-made for what I want and need.", None, png_icons)
+for fm, slug in projects:
+    render(slug, fm["title"], fm["tagline"], fm["icon"], [])

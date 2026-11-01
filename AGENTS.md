@@ -44,6 +44,13 @@ Note: `_config.yml` changes require restarting the server.
 - `blog/index.html` — writing list + activity chart at `/blog/`; `blog/feed.xml` (Atom) and `blog/posts.json` (chart data) sit beside it. `/writing/` is a redirect stub.
 - `_blog/*.html` — one file per post, **generated, don't edit by hand**. `bin/sync-blog` mirrors published posts from the private blog Ghost (tailnet-only) into `_blog/` and `assets/blog/`, then the result is committed and pushed so CI deploys it. Needs `GHOST_CONTENT_KEY` (or `GHOST_ADMIN_KEY_FILE`) and Tailscale access. The blog Ghost is empty for now (sports stays on Micro.blog, everything else lives in the journal); the Writing links hide until `_blog/` has posts. Posts tagged `#untitled` render as titleless notes. Write posts in Ghost, never here.
 
+### SEO / AEO
+
+- `_includes/head.html` builds title, description, canonical, Open Graph and Twitter tags from page front matter (`seo_title`, `description`, `image`; projects fall back to `tagline` and `/assets/og/<slug>.png`). `_includes/jsonld.html` adds JSON-LD (Person + WebSite on `/`, SoftwareApplication on projects, BlogPosting on posts).
+- Each project needs `description` (one factual sentence: what it is, free, open source, platform) and `category` (a schema.org application category) in front matter.
+- Share images live in `assets/og/`. After adding a project or changing a tagline, run `bin/make-og` (headless Chrome) and commit the PNGs.
+- `sitemap.xml`, `robots.txt` and `llms.txt` are hand-written at the repo root and list projects (and blog posts once `_blog/` has any). `llms.txt` is the summary for AI crawlers.
+
 ### Layouts & Templates
 
 - `_layouts/default.html` — base HTML shell, includes `_includes/head.html`

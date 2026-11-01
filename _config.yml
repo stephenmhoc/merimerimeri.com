@@ -25,7 +25,8 @@ description: >-
 baseurl: "/"
 url: "https://merimerimeri.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: stephenmhoc
-github_username:  smeriwether
+github_username:  stephenmhoc
+og_image: /assets/og/default.png
 
 collections:
   projects:

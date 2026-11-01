@@ -1,0 +1,5 @@
+# Everything here is public on purpose. Search engines and AI crawlers are welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://merimerimeri.com/sitemap.xml

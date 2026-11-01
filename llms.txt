@@ -1,0 +1,21 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# Stephen Meriwether
+
+> Stephen Meriwether builds small, open-source apps and tools for personal use and shares them here. Based in Rochester, New York. Everything below is free, with source on GitHub.
+
+## Apps
+{% assign projects = site.projects | sort: "order" %}{% for p in projects %}
+- [{{ p.title }}]({{ p.url | absolute_url }}): {{ p.description }}{% endfor %}
+
+{% if site.blog.size > 0 %}## Writing
+{% assign posts = site.blog | sort: "date" | reverse %}{% for p in posts limit: 20 %}
+- [{% include post-title.html post=p %}]({{ p.url | absolute_url }}) ({{ p.date | date: "%Y-%m-%d" }}){% endfor %}
+
+{% endif %}## Elsewhere
+- [GitHub](https://github.com/{{ site.github_username }})
+- [X](https://x.com/{{ site.twitter_username }})
+- [Email](mailto:stephen@merimerimeri.com)

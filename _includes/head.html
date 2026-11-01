@@ -1,28 +1,33 @@
-<title>
-  {% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title
-  }}{% endif %}
-</title>
+{% assign page_url = page.url | replace: 'index.html', '' | absolute_url %}
+{% assign page_title = page.seo_title %}
+{% if page_title == nil %}{% if page.title %}{% capture page_title %}{{ page.title }} | {{ site.title }}{% endcapture %}{% else %}{% assign page_title = site.title %}{% endif %}{% endif %}
+{% assign page_description = page.description | default: page.tagline | default: site.description %}
+{% assign page_image = page.image %}
+{% if page_image == nil and page.layout == 'project' %}{% capture page_image %}/assets/og/{{ page.slug | default: page.name | remove: '.md' }}.png{% endcapture %}{% endif %}
+{% assign page_image = page_image | default: site.og_image | absolute_url %}
+<title>{{ page_title }}</title>
 <meta http-equiv="content-type" content="text/html" charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-{% assign page_description = page.description | default: site.description %}
-<meta name="description" content="{{ page_description }}" />
-<meta property="og:type" content="website" />
-<meta
-  property="og:title"
-  content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}"
-/>
-<meta property="og:description" content="{{ page_description }}" />
-<meta
-  property="twitter:title"
-  content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}"
-/>
-<meta property="twitter:creator" content="@{{ site.twitter_username }}" />
-<meta property="twitter:description" content="{{ page_description }}" />
-<meta name="twitter:card" content="summary" />
-<link rel="alternate" type="application/rss+xml" title="Stephen Meriwether's Blog" href="/blog/feed.xml" />
+<meta name="description" content="{{ page_description | strip_html | strip_newlines | escape }}" />
+<link rel="canonical" href="{{ page_url }}" />
+{% if page.url == '/blog/' and site.blog.size == 0 %}<meta name="robots" content="noindex" />{% endif %}
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta property="og:type" content="{% if page.layout == 'blog_post' %}article{% else %}website{% endif %}" />
+<meta property="og:url" content="{{ page_url }}" />
+<meta property="og:title" content="{{ page_title | escape }}" />
+<meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}" />
+<meta property="og:image" content="{{ page_image }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@{{ site.twitter_username }}" />
+<meta name="twitter:creator" content="@{{ site.twitter_username }}" />
+<meta name="twitter:title" content="{{ page_title | escape }}" />
+<meta name="twitter:description" content="{{ page_description | strip_html | strip_newlines | escape }}" />
+<meta name="twitter:image" content="{{ page_image }}" />
+{% if site.blog.size > 0 %}<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/blog/feed.xml" />{% endif %}
 <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="/css/site.css?v={{ site.time | date: '%Y%m%d%H%M%S' }}" />
+{% include jsonld.html %}

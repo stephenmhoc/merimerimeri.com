@@ -152,7 +152,15 @@ body {
   }
 
   .site-footer {
-    @apply mt-12 flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-500;
+    @apply mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-neutral-500;
+  }
+
+  .site-footer a.social-link {
+    @apply no-underline text-neutral-500 hover:text-neutral-900;
+  }
+
+  .social-link svg {
+    @apply block h-5 w-5;
   }
 
   /* Writing activity - live Micro.blog contribution chart */
