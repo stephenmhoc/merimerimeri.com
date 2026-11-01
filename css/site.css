@@ -460,7 +460,7 @@ body {
 
   .project-screenshot {
     @apply rounded-lg border border-neutral-200;
-    max-height: 22rem;
+    height: 16rem;
     width: auto;
     max-width: 100%;
     object-fit: contain;
