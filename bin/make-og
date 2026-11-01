@@ -12,7 +12,7 @@ OUT = os.path.join(ROOT, "assets", "og")
 
 PAGE = """<!doctype html><meta charset="utf-8"><style>
 *{{box-sizing:border-box}} html,body{{margin:0;width:1200px;height:630px}}
-body{{background:#FAFAFA;color:#262626;font-family:Georgia,'Times New Roman',serif;display:flex;flex-direction:column;justify-content:space-between;padding:72px 80px}}
+body{{background:#FAF9F6;color:#262626;font-family:Georgia,'Times New Roman',serif;display:flex;flex-direction:column;justify-content:space-between;padding:72px 80px}}
 .top{{display:flex;align-items:center;gap:36px}} .icon{{width:168px;height:168px;border-radius:38px;object-fit:contain}}
 h1{{font-size:{h1}px;line-height:1.05;margin:0;letter-spacing:-1px}} p.tag{{font-size:38px;line-height:1.3;margin:24px 0 0;color:#525252;max-width:880px}}
 .foot{{display:flex;justify-content:space-between;align-items:center;font-size:30px;color:#737373}} .icons{{display:flex;gap:18px}} .icons img{{width:64px;height:64px;border-radius:15px}}
