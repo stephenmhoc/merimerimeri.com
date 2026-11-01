@@ -1,7 +1,7 @@
 ---
 title: Quill
 tagline: "A quiet Markdown editor for publishing to my own blogs."
-tags: [iPhone, iPad, macOS]
+tags: [iOS, macOS]
 order: 3
 icon: /assets/icons/quill.png
 source: https://github.com/stephenmhoc/quill

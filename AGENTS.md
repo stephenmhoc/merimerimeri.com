@@ -40,7 +40,7 @@ Note: `_config.yml` changes require restarting the server.
 - `cloudflare.config.ts` — Worker name, custom domain, asset settings
 - `wrangler.config.ts` — points the Worker's assets at `_site/`
 - `index.html` — homepage: intro plus an icon-and-text list of projects
-- `_projects/*.md` — one file per project; each renders at `/<slug>/` via `_layouts/project.html`. Front matter: `title`, `tagline`, `tags` (platforms, e.g. `[macOS, iPhone]`; they render as pills and drive the `/apps/` filter), `order`, `icon` (required), `source`, `download` (Mac DMG), `testflight` (iOS public link; hidden when empty), `screenshot`, `live`. The list on the homepage and `/apps/` is the shared `_includes/project-list.html`. To add a project, add a file here (and an icon in `assets/icons/` if it has one)
+- `_projects/*.md` — one file per project; each renders at `/<slug>/` via `_layouts/project.html`. Front matter: `title`, `tagline`, `tags` (platforms, e.g. `[macOS, iOS]`; they render as pills and drive the `/apps/` filter), `order`, `icon` (required), `source`, `download` (Mac DMG), `testflight` (iOS public link; hidden when empty), `screenshot`, `live`. The list on the homepage and `/apps/` is the shared `_includes/project-list.html`. To add a project, add a file here (and an icon in `assets/icons/` if it has one)
 - `blog/index.html` — writing listing page (permalink: `/writing/`)
 
 ### Layouts & Templates
