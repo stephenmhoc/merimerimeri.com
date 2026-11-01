@@ -466,4 +466,38 @@ body {
   .section-heading h2 a {
     @apply no-underline hover:underline;
   }
+
+  /* Tags */
+  .tag-list {
+    @apply mt-8 flex flex-wrap gap-2;
+  }
+
+  .tag-list li {
+    @apply list-none;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border border-neutral-300 bg-transparent px-3 py-0.5 text-sm leading-6 text-neutral-600 no-underline transition-colors cursor-pointer;
+    font-family: inherit;
+  }
+
+  .tag:hover {
+    @apply border-neutral-400 bg-secondary text-neutral-900;
+  }
+
+  .tag.is-active {
+    @apply border-neutral-800 bg-neutral-800 text-primary;
+  }
+
+  .tag-filter {
+    @apply mt-8 flex flex-wrap gap-2;
+  }
+
+  .tag-filter[hidden] {
+    display: none;
+  }
+
+  .project-list li[hidden] {
+    display: none;
+  }
 }

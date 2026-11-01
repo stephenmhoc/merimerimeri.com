@@ -1,7 +1,7 @@
 <ul class="project-list">
   {% assign projects = site.projects | sort: "order" %}
   {% for project in projects %}
-  <li>
+  <li data-tags="{% for tag in project.tags %}{{ tag | downcase | replace: ' ', '-' }}{% unless forloop.last %},{% endunless %}{% endfor %}">
     <a href="{{ project.url }}" class="project-row">
       <img class="project-icon" src="{{ project.icon }}" alt="" width="40" height="40" loading="lazy">
       <span class="project-row-text">

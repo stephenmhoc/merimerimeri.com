@@ -1,7 +1,7 @@
 ---
 title: Task Ferry
 tagline: "Your personal Apple Reminders, on your work Mac."
-platform: macOS
+tags: [macOS]
 order: 2
 icon: /assets/icons/task-ferry.png
 source: https://github.com/stephenmhoc/task-ferry

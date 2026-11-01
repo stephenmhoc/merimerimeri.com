@@ -1,7 +1,7 @@
 ---
 title: AI Radar
 tagline: "Track podcast episodes from major AI labs."
-platform: Web
+tags: [Web]
 order: 5
 source: https://github.com/stephenmhoc/ai-radar
 live: https://ai-radar.merimerimeri.com/

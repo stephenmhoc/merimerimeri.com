@@ -1,7 +1,7 @@
 ---
 title: MenuMines
 tagline: "Minesweeper in your menu bar."
-platform: macOS
+tags: [macOS]
 order: 1
 icon: /assets/icons/menumines.png
 source: https://github.com/stephenmhoc/menumines

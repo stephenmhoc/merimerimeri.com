@@ -1,7 +1,7 @@
 ---
 title: Tabata Ticker
 tagline: "Classic 20/10 Tabata timer for iPhone and Apple Watch."
-platform: iPhone, Apple Watch
+tags: [iPhone, Apple Watch]
 order: 4
 source: https://github.com/stephenmhoc/tabata-ticker
 icon: /assets/icons/tabata-ticker.png
