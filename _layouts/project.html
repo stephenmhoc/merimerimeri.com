@@ -27,6 +27,6 @@ layout: default
     <li><a href="{{ page.source }}" target="_blank" rel="noopener noreferrer"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/></svg>Source code</a></li>
   </ul>
   <ul class="tag-list" aria-label="Tags">
-    {% for tag in page.tags %}<li><a class="tag" href="/apps/?tag={{ tag | downcase | replace: ' ', '-' }}">{{ tag }}</a></li>{% endfor %}
+    {% for tag in page.tags %}<li><a class="tag" href="/apps/?tag={{ tag | downcase | replace: ' ', '-' }}">{% include tag-icon.html tag=tag %}{{ tag }}</a></li>{% endfor %}
   </ul>
 </article>

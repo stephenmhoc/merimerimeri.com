@@ -477,7 +477,7 @@ body {
   }
 
   .tag {
-    @apply inline-flex items-center rounded-full border border-neutral-300 bg-transparent px-3 py-0.5 text-sm leading-6 text-neutral-600 no-underline transition-colors cursor-pointer;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-transparent px-3 py-0.5 text-sm leading-6 text-neutral-600 no-underline transition-colors cursor-pointer;
     font-family: inherit;
   }
 
@@ -504,5 +504,9 @@ body {
 
   .project-list li[hidden] {
     display: none;
+  }
+
+  .tag-icon {
+    @apply h-3.5 w-3.5 shrink-0;
   }
 }
