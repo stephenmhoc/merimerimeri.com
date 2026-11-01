@@ -18,7 +18,13 @@ layout: default
 
   {{ content }}
 
-  {% if page.screenshot %}<img class="project-screenshot" src="{{ page.screenshot }}" alt="{{ page.title }} screenshot" loading="lazy">{% endif %}
+  {% assign shots = page.screenshots %}
+  {% if shots == nil and page.screenshot %}{% assign shots = page.screenshot | split: "," %}{% endif %}
+  {% if shots %}
+  <div class="project-screenshots">
+    {% for shot in shots %}<img class="project-screenshot" src="{{ shot | strip }}" alt="{{ page.title }} screenshot {{ forloop.index }}" loading="lazy">{% endfor %}
+  </div>
+  {% endif %}
 
   <ul class="project-links">
     {% if page.live %}<li><a href="{{ page.live }}" target="_blank" rel="noopener noreferrer"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>Open the app</a></li>{% endif %}

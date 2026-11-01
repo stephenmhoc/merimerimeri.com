@@ -454,8 +454,12 @@ body {
     @apply mt-4 text-sm text-neutral-500;
   }
 
+  .project-screenshots {
+    @apply mt-8 flex flex-wrap items-end gap-4;
+  }
+
   .project-screenshot {
-    @apply mt-8 w-full rounded-lg border border-neutral-200;
+    @apply rounded-lg border border-neutral-200;
     max-height: 22rem;
     width: auto;
     max-width: 100%;
