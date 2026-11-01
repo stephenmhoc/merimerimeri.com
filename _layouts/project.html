@@ -4,7 +4,7 @@ layout: default
 
 <nav class="site-nav" aria-label="Primary navigation">
   <a href="/">Home</a>
-  <a href="/blog/">Writing</a>
+  {% if site.blog.size > 0 %}<a href="/blog/">Writing</a>{% endif %}
 </nav>
 
 <article id="content" class="pb-16">

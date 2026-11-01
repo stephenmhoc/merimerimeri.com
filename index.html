@@ -5,7 +5,7 @@ description: "Personal site for Stephen Meriwether: software, AI, projects, and 
 
 <nav class="site-nav" aria-label="Primary navigation">
   <a href="/apps/">Apps</a>
-  <a href="/blog/">Writing</a>
+  {% if site.blog.size > 0 %}<a href="/blog/">Writing</a>{% endif %}
 </nav>
 
 <section class="pb-16">
@@ -28,6 +28,7 @@ description: "Personal site for Stephen Meriwether: software, AI, projects, and 
     {% include project-list.html %}
   </section>
 
+  {% if site.blog.size > 0 %}
   <section class="section-block" aria-labelledby="writing-heading">
     <div class="section-heading">
       <h2 id="writing-heading">Writing</h2>
@@ -36,6 +37,7 @@ description: "Personal site for Stephen Meriwether: software, AI, projects, and 
       Short notes on software, AI, and whatever I'm trying to understand. <a href="/blog/">Read more</a>.
     </p>
   </section>
+  {% endif %}
 
   <footer class="site-footer">
     <a href="mailto:stephen@merimerimeri.com">Email</a>

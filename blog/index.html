@@ -20,6 +20,7 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
   </p>
 </section>
 
+{% if site.blog.size > 0 %}
 <section
   class="writing-activity"
   data-writing-activity
@@ -84,3 +85,6 @@ description: "Short notes about software, AI, sports, books, and ideas from Step
 </section>
 
 <script src="/assets/js/writing-activity.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+{% else %}
+<p>Nothing here yet.</p>
+{% endif %}
