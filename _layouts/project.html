@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<nav class="site-nav" aria-label="Primary navigation">
+  <a href="/">Home</a>
+  <a href="/writing/">Writing</a>
+</nav>
+
+<article id="content" class="pb-16">
+  <header class="project-header">
+    {% if page.icon %}<img class="project-icon" src="{{ page.icon }}" alt="" width="64" height="64">{% else %}<span class="project-icon project-icon-fallback" aria-hidden="true">{{ page.title | slice: 0 }}</span>{% endif %}
+    <div>
+      <h1>{{ page.title }}</h1>
+      <p class="project-tagline">{{ page.tagline }}</p>
+    </div>
+  </header>
+
+  {{ content }}
+
+  <ul class="project-links">
+    {% if page.live %}<li><a href="{{ page.live }}" target="_blank" rel="noopener noreferrer">Open the app</a></li>{% endif %}
+    {% if page.download %}<li><a href="{{ page.download }}" target="_blank" rel="noopener noreferrer">Download</a></li>{% endif %}
+    <li><a href="{{ page.source }}" target="_blank" rel="noopener noreferrer">Source code</a></li>
+  </ul>
+  <p class="project-meta">{{ page.platform }}</p>
+</article>

@@ -39,13 +39,15 @@ Note: `_config.yml` changes require restarting the server.
 - `postcss.config.js` — PostCSS pipeline
 - `cloudflare.config.ts` — Worker name, custom domain, asset settings
 - `wrangler.config.ts` — points the Worker's assets at `_site/`
-- `index.html` — homepage with product cards (MenuMines, HFFS)
+- `index.html` — homepage: intro plus an icon-and-text list of projects
+- `_projects/*.md` — one file per project; each renders at `/<slug>/` via `_layouts/project.html`. Front matter: `title`, `tagline`, `platform`, `order`, `icon`, `source`, `download`, `live`. To add a project, add a file here (and an icon in `assets/icons/` if it has one)
 - `blog/index.html` — writing listing page (permalink: `/writing/`)
 
 ### Layouts & Templates
 
 - `_layouts/default.html` — base HTML shell, includes `_includes/head.html`
 - `_layouts/post.html` — blog post layout wrapping content in `<div id="content">`
+- `_layouts/project.html` — project page: what it is, download, source
 - `_layouts/image_page.html` — image-focused pages
 - `_includes/head.html` — meta tags, OG tags, favicon links, stylesheet
 
