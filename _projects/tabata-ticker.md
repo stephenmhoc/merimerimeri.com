@@ -5,7 +5,7 @@ platform: iPhone, Apple Watch
 order: 4
 source: https://github.com/stephenmhoc/tabata-ticker
 icon: /assets/icons/tabata-ticker.png
-testflight: ""
+testflight: https://testflight.apple.com/join/GDfnUF51
 screenshot: /assets/screenshots/tabata-ticker.png
 ---
 
