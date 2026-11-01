@@ -5,7 +5,8 @@ platform: macOS
 order: 2
 icon: /assets/icons/task-ferry.png
 source: https://github.com/stephenmhoc/task-ferry
-download: https://github.com/stephenmhoc/task-ferry/releases/latest
+download: https://github.com/stephenmhoc/task-ferry/releases/latest/download/TaskFerry.dmg
+screenshot: /assets/screenshots/task-ferry.png
 ---
 
 A small Mac app that ferries Apple Reminders between a personal Mac and a work Mac. A bridge runs on the personal machine and talks to Reminders through EventKit. A client on the work machine shows Today, Tomorrow, and your lists over a Cloudflare Tunnel.

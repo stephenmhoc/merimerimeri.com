@@ -449,4 +449,17 @@ body {
   .project-meta {
     @apply mt-4 text-sm text-neutral-500;
   }
+
+  .project-screenshot {
+    @apply mt-8 w-full rounded-lg border border-neutral-200;
+    max-height: 22rem;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .project-header h1 a,
+  .section-heading h2 a {
+    @apply no-underline hover:underline;
+  }
 }

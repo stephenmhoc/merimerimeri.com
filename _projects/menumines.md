@@ -5,7 +5,8 @@ platform: macOS
 order: 1
 icon: /assets/icons/menumines.png
 source: https://github.com/stephenmhoc/menumines
-download: https://github.com/stephenmhoc/menumines/releases/latest
+download: https://github.com/stephenmhoc/menumines/releases/latest/download/MenuMines.dmg
+screenshot: /assets/screenshots/menumines.png
 ---
 
 A tiny Minesweeper that lives in the macOS menu bar. One click and you're playing. There's a daily puzzle, the same board for everyone, no dock icon, and nothing to set up.

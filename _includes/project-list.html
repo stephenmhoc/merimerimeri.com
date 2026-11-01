@@ -1,0 +1,14 @@
+<ul class="project-list">
+  {% assign projects = site.projects | sort: "order" %}
+  {% for project in projects %}
+  <li>
+    <a href="{{ project.url }}" class="project-row">
+      <img class="project-icon" src="{{ project.icon }}" alt="" width="40" height="40" loading="lazy">
+      <span class="project-row-text">
+        <span class="project-row-name">{{ project.title }}</span>
+        <span class="project-row-tagline">{{ project.tagline }}</span>
+      </span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

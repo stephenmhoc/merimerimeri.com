@@ -9,7 +9,7 @@ layout: default
 
 <article id="content" class="pb-16">
   <header class="project-header">
-    {% if page.icon %}<img class="project-icon" src="{{ page.icon }}" alt="" width="64" height="64">{% else %}<span class="project-icon project-icon-fallback" aria-hidden="true">{{ page.title | slice: 0 }}</span>{% endif %}
+    <img class="project-icon" src="{{ page.icon }}" alt="" width="64" height="64">
     <div>
       <h1>{{ page.title }}</h1>
       <p class="project-tagline">{{ page.tagline }}</p>
@@ -18,9 +18,12 @@ layout: default
 
   {{ content }}
 
+  {% if page.screenshot %}<img class="project-screenshot" src="{{ page.screenshot }}" alt="{{ page.title }} screenshot" loading="lazy">{% endif %}
+
   <ul class="project-links">
     {% if page.live %}<li><a href="{{ page.live }}" target="_blank" rel="noopener noreferrer">Open the app</a></li>{% endif %}
-    {% if page.download %}<li><a href="{{ page.download }}" target="_blank" rel="noopener noreferrer">Download</a></li>{% endif %}
+    {% if page.download %}<li><a href="{{ page.download }}">Download for Mac</a></li>{% endif %}
+    {% if page.testflight and page.testflight != "" %}<li><a href="{{ page.testflight }}" target="_blank" rel="noopener noreferrer">Join the TestFlight</a></li>{% endif %}
     <li><a href="{{ page.source }}" target="_blank" rel="noopener noreferrer">Source code</a></li>
   </ul>
   <p class="project-meta">{{ page.platform }}</p>
