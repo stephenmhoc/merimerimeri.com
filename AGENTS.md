@@ -35,7 +35,7 @@ Note: `_config.yml` changes require restarting the server.
 
 - `_config.yml` — site settings, plugin config
 - `css/site.css` — main stylesheet (Tailwind imports + custom component styles using `@layer`)
-- `tailwind.config.js` — custom colors (`primary: #FFFFFA`, `secondary: #F5F4E9`), purge paths
+- `tailwind.config.js` — custom colors (`primary: #FAFAFA`, `secondary: #F0F0F0`), purge paths
 - `postcss.config.js` — PostCSS pipeline
 - `cloudflare.config.ts` — Worker name, custom domain, asset settings
 - `wrangler.config.ts` — points the Worker's assets at `_site/`
