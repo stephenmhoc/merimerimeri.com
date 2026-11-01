@@ -5,7 +5,7 @@ platform: iPhone, iPad, Mac
 order: 3
 icon: /assets/icons/quill.png
 source: https://github.com/stephenmhoc/quill
-download: https://github.com/stephenmhoc/quill/releases/download/v0.1.8-mac/Quill.dmg
+download: https://github.com/stephenmhoc/quill/releases/download/mac-latest/Quill.dmg
 testflight: https://testflight.apple.com/join/USvCH73B
 ---
 
