@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#14171c"/><g fill="none" stroke="#7ea6ff" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="32" r="8"/><circle cx="32" cy="32" r="16" opacity=".6"/><circle cx="32" cy="32" r="24" opacity=".3"/></g><path d="M32 32 L50 18" stroke="#7ea6ff" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="#7ea6ff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2433"/><stop offset="1" stop-color="#0b0f16"/></linearGradient>
+<radialGradient id="sweep" cx="64" cy="64" r="46" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7ea6ff" stop-opacity=".55"/><stop offset="1" stop-color="#7ea6ff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="128" height="128" rx="28" fill="url(#bg)"/>
+<g fill="none" stroke="#7ea6ff" stroke-width="2.5"><circle cx="64" cy="64" r="46" opacity=".35"/><circle cx="64" cy="64" r="31" opacity=".5"/><circle cx="64" cy="64" r="16" opacity=".7"/></g>
+<path d="M64 64 L64 18 A46 46 0 0 1 104 41 Z" fill="url(#sweep)"/>
+<line x1="64" y1="64" x2="104" y2="41" stroke="#bcd0ff" stroke-width="3" stroke-linecap="round"/>
+<circle cx="64" cy="64" r="4.5" fill="#e8efff"/>
+<circle cx="88" cy="38" r="5" fill="#ffb454"/><circle cx="88" cy="38" r="9" fill="none" stroke="#ffb454" stroke-opacity=".4" stroke-width="2"/>
+<circle cx="42" cy="80" r="3.5" fill="#9fe3b4"/>
+<circle cx="76" cy="90" r="3" fill="#9fe3b4" opacity=".7"/>
+</svg>
