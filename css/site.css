@@ -481,6 +481,11 @@ body {
     font-family: inherit;
   }
 
+  #content a.tag,
+  #content a.tag:hover {
+    @apply no-underline;
+  }
+
   .tag:hover {
     @apply border-neutral-400 bg-secondary text-neutral-900;
   }
