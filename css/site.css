@@ -435,7 +435,7 @@ body {
   }
 
   .project-links {
-    @apply mt-8 flex flex-wrap gap-x-5 gap-y-2;
+    @apply mt-8 flex flex-col gap-3;
   }
 
   .project-links li {
@@ -443,7 +443,11 @@ body {
   }
 
   .project-links a {
-    @apply underline underline-offset-[3px] text-neutral-900;
+    @apply inline-flex items-center gap-2.5 text-neutral-900 no-underline hover:underline underline-offset-[3px];
+  }
+
+  .link-icon {
+    @apply h-[1.125rem] w-[1.125rem] shrink-0 text-neutral-500;
   }
 
   .project-meta {

@@ -21,10 +21,10 @@ layout: default
   {% if page.screenshot %}<img class="project-screenshot" src="{{ page.screenshot }}" alt="{{ page.title }} screenshot" loading="lazy">{% endif %}
 
   <ul class="project-links">
-    {% if page.live %}<li><a href="{{ page.live }}" target="_blank" rel="noopener noreferrer">Open the app</a></li>{% endif %}
-    {% if page.download %}<li><a href="{{ page.download }}">Download for Mac</a></li>{% endif %}
-    {% if page.testflight and page.testflight != "" %}<li><a href="{{ page.testflight }}" target="_blank" rel="noopener noreferrer">Join the TestFlight</a></li>{% endif %}
-    <li><a href="{{ page.source }}" target="_blank" rel="noopener noreferrer">Source code</a></li>
+    {% if page.live %}<li><a href="{{ page.live }}" target="_blank" rel="noopener noreferrer"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>Open the app</a></li>{% endif %}
+    {% if page.download %}<li><a href="{{ page.download }}"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>Download for Mac</a></li>{% endif %}
+    {% if page.testflight and page.testflight != "" %}<li><a href="{{ page.testflight }}" target="_blank" rel="noopener noreferrer"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/></svg>Join the TestFlight</a></li>{% endif %}
+    <li><a href="{{ page.source }}" target="_blank" rel="noopener noreferrer"><svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/></svg>Source code</a></li>
   </ul>
   <p class="project-meta">{{ page.platform }}</p>
 </article>
